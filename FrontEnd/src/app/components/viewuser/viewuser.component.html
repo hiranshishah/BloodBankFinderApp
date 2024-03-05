@@ -1,0 +1,14 @@
+<mat-dialog-content *ngIf="user">
+    <h2>User Details</h2>
+    <p>User ID: {{ user.user_id }}</p>
+    <p>Name: {{ user.user_name }}</p>
+    <p>Age: {{ user.user_age }}</p>
+    <p>Gender: {{ user.user_gender }}</p>
+    <p>Email: {{ user.user_email }}</p>
+    <p>Phone: {{ user.user_phone }}</p>
+    <p>Adhaar: {{ formatAdhaar(user.user_adhaar) }}</p>
+    <p>Address: {{ user.user_address }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Close</button>
+</mat-dialog-actions>

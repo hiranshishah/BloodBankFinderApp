@@ -1,0 +1,65 @@
+<div class="w-100 flex ">
+  <div class=" flex d-flex flex-row justtify-content-center align-center w-100">
+    <div>
+      <form [formGroup]="searchForm">
+        <input type="text" formControlName="searchQuery" placeholder="Search by location or blood type">
+        <button type="button" (click)="searchBloodBanks()">Search</button>
+
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <form [formGroup]="filterForm" (click)="$event.stopPropagation()">
+    <!-- <div>
+      <label>Distance:</label>
+      <select formControlName="selectedDistance">
+        <option value="">Any</option>
+        <option value="5">Within 5 km</option>
+        <option value="10">Within 10 km</option>
+        <option value="20">Within 20 km</option>
+        Options -->
+    <!--
+      </select>
+    </div> -->
+    <div>
+      <label>Blood Type:</label>
+      <select formControlName="selectedBloodGroup">
+        <option value="">Any</option>
+        <option value="A_p">A+</option>
+        <option value="A_m">A-</option>
+        <option value="B_p">B+</option>
+        <option value="B_m">B-</option>
+        <option value="AB_p">AB+</option>
+        <option value="AB_m">AB-</option>
+        <option value="O_p">O+</option>
+        <option value="O_m">O-</option>
+        <!-- Options -->
+      </select>
+    </div>
+    <button type="button" (click)="filterBloodBanks()">Apply Filters</button>
+    <button type="button" (click)="resetFilters()">Reset Filters</button>
+  </form>
+  <div class="cards-container">
+    <div *ngFor="let bloodBank of filteredBloodBanks" class="blood-bank-card">
+      <div>
+        <h3>Blood Bank: {{ bloodBank.bloodbankname }}</h3>
+        <p>Location: {{ bloodBank.city }}, {{ bloodBank.state }}, {{bloodBank.pincode}}</p>
+        <p>Contact: {{ bloodBank.contact }}</p>
+        <p>Email: {{ bloodBank.email }}</p>
+        <button type="button" (click)="openDetailsDialog(bloodBank)">More Details</button>
+      </div>
+      <!-- Add more details as needed -->
+    </div>
+  </div>
+  <!-- 
+<mat-paginator [length]="bloodBanks.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons></mat-paginator> -->
+  <div class="paginator">
+    <mat-paginator [length]="bloodBanks.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</div>

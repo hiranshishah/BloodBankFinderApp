@@ -1,0 +1,23 @@
+<nav class="dv">
+    <h2 >Welcome to Blood Bank Portal !
+        <div  class="login">
+            
+            <button (click)="openSignInDialog()" [disabled]="isButtonDisabled">Login/signup</button>
+            <span *ngIf="userId">User ID: {{ userId }}</span>
+            <div *ngIf="userId" class="dropdown">
+                <button class="dropdown-toggle" (click)="toggleDropdown()">Options</button>
+                <div class="dropdown-menu">
+                    <a  (click)="viewUserDetails(userId)">User Details</a>
+                    <a href="" (click)="logout()">Logout</a>
+                </div>
+            </div>
+        <button routerLink="/payment">Donate</button>
+        </div>
+        
+    </h2>
+    <div class="button-group">
+        <button routerLink="/user">Search for blood banks</button>
+        <button routerLink="/bloodbank">Register/Update blood bank</button>
+    </div>
+</nav>
+<div class="bg"></div>

@@ -1,0 +1,25 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <!-- Wrap the existing content in a new div for styling -->
+            <div class="border border-dark p-3" style="max-width: 500px;">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-12 text-center">
+                        <h2 class="mb-4">Take a step towards charity!</h2>
+                        <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+                            <div class="alert alert-info mt-4" #paymentRef role="alert">
+                                Donation Amount: 
+                                <input formControlName="amount" type="number" placeholder="Enter amount">
+                            </div>
+                            <div *ngIf="isProcessingPayment" class="alert alert-warning" role="alert">
+                                Please do not refresh the page while the transaction is processing.
+                            </div>
+                            <div></div>
+                        </form>
+                        <button (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

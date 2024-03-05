@@ -1,0 +1,10 @@
+<!-- <form (submit)="onDelete()">
+    <input [(ngModel)]="bloodBankId" name="bloodBankId" placeholder="Enter Blood Bank ID" required>
+    <button type="submit">Delete</button>
+   </form> -->
+   <div class="container d-flex justify-content-center align-items-center" style="height:10px; border: 3px solid black; padding: 20px;">
+    <form class="text-center" (submit)="onDelete()">
+        <input [(ngModel)]="bloodBankId" name="bloodBankId" placeholder="Enter Blood Bank ID" required>
+        <button type="submit" class="btn btn-warning my-2">Delete</button>
+    </form>
+</div>

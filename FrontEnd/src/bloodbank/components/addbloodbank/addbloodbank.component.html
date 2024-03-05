@@ -1,0 +1,70 @@
+<form [formGroup]="bloodBankForm" (submit)="onSubmit()" >
+    <label for="srNo">SR No:</label>
+    <input type="text" formControlName="srNo">
+
+    <label for="bloodbankname">Blood Bank Name:</label>
+    <input type="text" formControlName="bloodbankname">
+
+    <label for="state">State:</label>
+    <input type="text" formControlName="state">
+
+    <label for="city">City:</label>
+    <input type="text" formControlName="city">
+
+    <label for="address">Address:</label>
+    <textarea formControlName="address"></textarea>
+
+    <label for="pincode">Pincode:</label>
+    <input type="text" formControlName="pincode">
+
+    <label for="contact">Contact:</label>
+    <input type="text" formControlName="contact">
+
+    <label for="email">Email:</label>
+    <input type="email" formControlName="email">
+
+    <label for="nodalofficer">Nodal Officer:</label>
+    <input type="text" formControlName="nodalofficer">
+
+    <label for="operationalhours">Operational Hours:</label>
+    <input type="text" formControlName="operationalhours">
+
+    <label for="latitude">Latitude:</label>
+    <input type="text" formControlName="latitude">
+
+    <label for="longitude">Longitude:</label>
+    <input type="text" formControlName="longitude">
+
+    <label for="price">Price per pint:</label>
+    <input type="text" formControlName="price">
+
+    <h3>Blood Types</h3>
+    <div formGroupName="bloodtypes">
+        <label for="A_p">A+:</label>
+        <input type="number" formControlName="A_p">
+
+        <label for="A_m">A-:</label>
+        <input type="number" formControlName="A_m">
+
+        <label for="B_p">B+:</label>
+        <input type="number" formControlName="B_p">
+
+        <label for="B_m">B-:</label>
+        <input type="number" formControlName="B_m">
+
+        <label for="AB_p">AB+:</label>
+        <input type="number" formControlName="AB_p">
+
+        <label for="AB_m">AB-:</label>
+        <input type="number" formControlName="AB_m">
+
+        <label for="O_p">O+:</label>
+        <input type="number" formControlName="O_p">
+
+        <label for="O_m">O-:</label>
+        <input type="number" formControlName="O_m">
+    </div>
+
+
+    <button type="submit" (click)="bloodBankForm" >Add Blood Bank</button>
+</form>

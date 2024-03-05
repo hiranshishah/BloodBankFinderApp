@@ -1,0 +1,103 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+
+form[formGroup="filterForm"] {
+    margin-bottom: 20px;
+}
+
+form[formGroup="filterForm"] select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+form[formGroup="filterForm"] button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form[formGroup="filterForm"] button:first-child {
+    background-color: #eed84bc3;
+    color: white;
+}
+
+form[formGroup="filterForm"] button:last-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Blood bank information styles */
+div[ngFor="let bloodBank of filteredBloodBanks"] {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(113, 57, 57, 0.1);
+}
+
+div[ngFor="let bloodBank of filteredBloodBanks"] h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+div[ngFor="let bloodBank of filteredBloodBanks"] p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+.blood-bank-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #f7eaea;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(11, 11, 11, 0.1);
+   }
+   
+   .blood-bank-card button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ca2121;
+    color: white;
+   }
+   
+   /* Center the search field */
+   form[formGroup="searchForm"] {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+form[formGroup="searchForm"] input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 70%; /* Adjust the width as needed */
+    margin-bottom: 10px;
+    align-items: center;
+    position: relative;
+}
+.mat-menu-panel {
+    width: 50%;;
+    padding: 100px;
+    position: relative;
+}
+button{
+    background-color: #e8ad0ac3;
+}
+.paginator{
+    margin-right: 0%;
+}
+   
