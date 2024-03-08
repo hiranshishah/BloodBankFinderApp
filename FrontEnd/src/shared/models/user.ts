@@ -8,4 +8,5 @@ export interface user{
     user_adhaar: string;
     user_address: string;
     user_password: string;
+    user_role: string;
 }

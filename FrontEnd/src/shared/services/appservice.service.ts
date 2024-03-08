@@ -33,8 +33,8 @@ export class AppserviceService {
   deleteUser(userId: number): Observable<any> {
     return this.http.delete(`${urls.userUrl}/${userId}`);
   }
-  loginuser(login: loginuser):Observable<loginuser>{
-    return this.http.post<loginuser>(`${urls.loginUrl}`, login);
+  loginuser(login: loginuser):Observable<any>{
+    return this.http.post<any>(`${urls.loginUrl}`, login);
   }
   setValue(value: string): void {
     this.value = value;

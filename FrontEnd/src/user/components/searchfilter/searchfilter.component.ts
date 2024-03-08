@@ -8,13 +8,18 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { LocationserviceService } from 'src/shared/services/locationservice.service';
 import { MaplocationComponent } from '../maplocation/maplocation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DeletebloodbankComponent } from 'src/bloodbank/components/deletebloodbank/deletebloodbank.component';
+import { AddbloodbankComponent } from 'src/bloodbank/components/addbloodbank/addbloodbank.component';
+import { UpdatebloodbankComponent } from 'src/bloodbank/components/updatebloodbank/updatebloodbank.component';
+import { AuthGuard } from 'src/shared/guards/auth.guard'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-searchfilter',
   templateUrl: './searchfilter.component.html',
   styleUrls: ['./searchfilter.component.scss']
 })
-export class SearchfilterComponent implements OnInit, OnDestroy{
+export class SearchfilterComponent implements OnInit, OnDestroy {
   bloodBanks: bloodbank[];
   searchQuery: string;
   searchForm: FormGroup;
@@ -22,30 +27,33 @@ export class SearchfilterComponent implements OnInit, OnDestroy{
   filteredBloodBanks: bloodbank[];
   bloodBankSubscription: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-pageSize = 5;
-pageIndex = 0;
-pageSizeOptions: number[] = [5, 10, 25, 50];
+  pageSize = 5;
+  pageIndex = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
+  userRole: string;
+  currentUser: any;
 
   constructor(
     private bloodbankservice: BloodbankService,
     private formBuilder: FormBuilder,
     private searchService: SearchserviceService,
     private locationservice: LocationserviceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth: AuthGuard,
+    private snackBar: MatSnackBar
   ) {
     this.searchForm = this.formBuilder.group({
       searchQuery: ''
     });
 
     this.filterForm = this.formBuilder.group({
-      selectedDistance: '',
+      // selectedDistance: '',
       selectedBloodGroup: ''
     });
   }
 
   async ngOnInit(): Promise<void> {
     this.getBloodBanks();
-    // this.paginator.page.subscribe(() => this.loadPage());
     const position = await this.locationservice.getLocation();
     const userLatitude = position.coords.latitude;
     const userLongitude = position.coords.longitude;
@@ -54,15 +62,8 @@ pageSizeOptions: number[] = [5, 10, 25, 50];
       this.filteredBloodBanks = [...bloodBanks];
       this.applyPagination();
     }
-    
 
-    
-    // this.filteredBloodBanks = this.filteredBloodBanks.map(bloodBank => {
-    //   const distance = this.locationservice.haversineDistance(userLatitude, userLongitude, bloodBank.latitude, bloodBank.longitude);
-    //   return { ...bloodBank, distance }; 
-    // });
-
-    // this.filteredBloodBanks.sort((a, b) => a.distance - b.distance);
+    this.userRole = sessionStorage.getItem('role');
   }
 
   ngOnDestroy(): void {
@@ -88,16 +89,11 @@ pageSizeOptions: number[] = [5, 10, 25, 50];
 
   searchBloodBanks(): void {
     const searchQuery = this.searchForm.value.searchQuery.toLowerCase();
-    const selectedBloodGroup = this.filterForm.value.selectedBloodGroup?.toLowerCase();
 
     if (searchQuery && searchQuery.trim() !== '') {
       this.searchService.getsearchedrecords(searchQuery).subscribe(filteredBloodBanks => {
         this.filteredBloodBanks = filteredBloodBanks;
-        if (selectedBloodGroup) {
-          this.filteredBloodBanks = this.filteredBloodBanks.filter(bloodBank => {
-            return bloodBank.bloodtypes[selectedBloodGroup] > 0;
-          });
-        } // Update paginator length
+        this.applyPagination();
       });
     } else {
       this.filteredBloodBanks = [...this.bloodBanks];
@@ -106,11 +102,14 @@ pageSizeOptions: number[] = [5, 10, 25, 50];
   }
 
   filterBloodBanks(): void {
-    const selectedBloodGroup = this.filterForm.value.selectedBloodGroup?.toLowerCase();
+    const selectedBloodGroup = this.filterForm.value.selectedBloodGroup.toLowerCase();
+    console.log(selectedBloodGroup);
     console.log(this.filterForm.value);
     if (selectedBloodGroup) {
+      console.log(selectedBloodGroup);
+
       this.filteredBloodBanks = this.bloodBanks.filter(bloodBank => {
-        return bloodBank.bloodtypes[selectedBloodGroup] > 0;
+        bloodBank.bloodtypes['selectedBloodGroup'] > 0;
       });
     } else {
       this.filteredBloodBanks = [...this.bloodBanks];
@@ -120,30 +119,56 @@ pageSizeOptions: number[] = [5, 10, 25, 50];
     this.applyPagination(); // Update paginator length
   }
 
-  // loadPage(): void {
-  //   const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-  //   const endIndex = startIndex + this.paginator.pageSize;
-  //   this.filteredBloodBanks = this.filteredBloodBanks.slice(startIndex, endIndex);
-  // }
-
   resetFilters(): void {
     this.filterForm.reset();
     this.filteredBloodBanks = [...this.bloodBanks];
   }
+
   openDetailsDialog(bloodBank: bloodbank): void {
-    this.dialog.open(MaplocationComponent, {
-      data: bloodBank
-    });
+    this.currentUser = localStorage.getItem('currentUser');
+    if (this.currentUser) {
+      this.dialog.open(MaplocationComponent, {
+        data: bloodBank
+      });
+    }
+    else {
+      this.snackBar.open('Please log in to view the details', 'OK', {
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      });
+
+    }
   }
   applyPagination(): void {
     const startIndex = this.pageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.filteredBloodBanks = this.bloodBanks.slice(startIndex, endIndex);
   }
-  
+
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.applyPagination();
   }
+  opendeletedialog(bloodBank: bloodbank): void {
+    this.dialog.open(DeletebloodbankComponent, {
+      data: bloodBank
+    });
+  }
+  openAddDialog(): void {
+    this.dialog.open(AddbloodbankComponent, {
+      height: '85vh',
+      width: '80vw',
+
+    });
+  }
+  openUpdateDialog(bloodBank: bloodbank): void {
+    this.dialog.open(UpdatebloodbankComponent, {
+      data: bloodBank,
+      height: '85vh',
+      width: '80vw',
+      disableClose: true
+    });
+  }
+
 }

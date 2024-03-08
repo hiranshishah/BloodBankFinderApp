@@ -1,6 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { user } from 'src/shared/models/user';
-import { AppserviceService } from 'src/shared/services/appservice.service';
 
 @Component({
   selector: 'app-user',
@@ -9,14 +7,11 @@ import { AppserviceService } from 'src/shared/services/appservice.service';
   encapsulation: ViewEncapsulation.None
 })
 export class UserComponent {
-  users!: user[];
 
-
-
-  constructor(private userService: AppserviceService) { }
+  constructor() { }
 
   ngOnInit() {
-    
+
   }
-  
+
 }

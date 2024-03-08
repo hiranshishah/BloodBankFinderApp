@@ -36,5 +36,13 @@
         <mat-label>Address</mat-label>
         <input matInput type="text" formControlName="user_address">
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Sign Up</button>
+    <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="user_role">
+            <mat-option value="user">User</mat-option>
+            <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="black" type="submit">Sign Up</button>
+    <p class="underline-hover" (click)="dialogRef.close(false)">Already a User? Login here.</p>
 </form>

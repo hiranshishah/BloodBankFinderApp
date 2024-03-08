@@ -8,6 +8,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ViewuserComponent } from './components/viewuser/viewuser.component';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,20 +19,12 @@ const routes: Routes = [
     path: 'bloodbank',
     loadChildren: () => import('src/bloodbank/bloodbank.module').then(m => m.BloodbankModule)
   },
-  // {
-  //   path: '',
-  //   component: AppComponent,
-  //   children:[{
-  //     path:'home',
-  //     component: HomeComponent
-  //   }
-  //   ]
-  // },
 
   
   { path: 'home', component: HomeComponent },
   {
-    path:'payment', component:PaymentComponent
+    path:'payment', component:PaymentComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'login',

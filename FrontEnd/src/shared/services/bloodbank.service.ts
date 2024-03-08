@@ -14,8 +14,8 @@ export class BloodbankService {
   getBloodBanks(): Observable<bloodbank[]> {
     return this.http.get<bloodbank[]>(`${urls.bloodbankUrl}`);
   }
-  getbloodbankbyid(bloodbankid:string):Observable<bloodbank[]> {
-    return this.http.get<bloodbank[]>(`${urls.bloodbankUrl}/${bloodbankid}`);
+  getbloodbankbyid(bloodbankid:string):Observable<bloodbank> {
+    return this.http.get<bloodbank>(`${urls.bloodbankUrl}/${bloodbankid}`);
   }
   addBloodBank(bloodBank: bloodbank): Observable<bloodbank[]> {
     return this.http.post<bloodbank[]>(`${urls.bloodbankUrl}`, bloodBank);
@@ -25,8 +25,8 @@ export class BloodbankService {
     return this.http.delete<bloodbank[]>(`${urls.bloodbankUrl}/${bloodBankId}`);
   }
 
-  updateBloodBank(bloodbankid:string,bloodBank: bloodbank): Observable<bloodbank[]> {
-    return this.http.put<bloodbank[]>(`${urls.bloodbankUrl}/${bloodbankid}`, bloodBank);
+  updateBloodBank(bloodbankid:string,bloodBank: bloodbank): Observable<bloodbank> {
+    return this.http.put<bloodbank>(`${urls.bloodbankUrl}/${bloodbankid}`, bloodBank,{headers: {'Content-Type':'application/json'}});
   }
 
  

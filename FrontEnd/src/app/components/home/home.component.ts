@@ -14,7 +14,8 @@ import { ViewuserComponent } from '../viewuser/viewuser.component';
 })
 export class HomeComponent {
 
-  isButtonDisabled: boolean = false; // Set this to true after successful login or signup
+  isButtonDisabled: boolean = false; 
+  isLoggedIn = false;
   userId: string | undefined;
   dropdownOpen: boolean = true;
   constructor(private dialog: MatDialog, private userservice: AppserviceService, private router: Router) {
@@ -31,7 +32,6 @@ export class HomeComponent {
     this.setUserId();
   }
 
-  //function to open SignUp Dialog box.
   openSignUpDialog(): void {
     this.dialog.open(SignupComponent);
     this.setUserId();
@@ -40,12 +40,16 @@ export class HomeComponent {
     this.userId = this.userservice.getValue();
     this.userservice.valueChange.subscribe(newValue => {
       this.userId = newValue;
+      this.isButtonDisabled = true;
+      this.isLoggedIn=true;
     });
-    this.isButtonDisabled = true;
+    
   }
   logout(): void {
     this.userservice.clearValue();
+    sessionStorage.clear();
     this.router.navigate(['/']);
+    localStorage.clear();
   }
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
@@ -55,7 +59,12 @@ export class HomeComponent {
       data: userid
     });
   }
-
+  updateLoginStatus(loggedIn: boolean) {
+    this.isLoggedIn = loggedIn;
+ }
+onhome():void{
+  this.router.navigate(['/'])
+}
 
 
 

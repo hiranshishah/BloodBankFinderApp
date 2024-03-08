@@ -1,0 +1,21 @@
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #20131c; /* Customize the color */
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-label {
+    color: #0e0d0e; /* Customize the color */
+}
+
+.underline-hover {
+    text-decoration: none;
+    color: #1b1b1b; 
+    cursor: pointer;
+}
+
+.underline-hover:hover {
+    text-decoration: underline;
+}
+.gap-10px{
+    gap: 10px;
+
+}

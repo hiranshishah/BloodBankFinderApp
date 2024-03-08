@@ -63,33 +63,7 @@ namespace BloodBankFinderApp.Repositories
             var result = await _userCollection.DeleteOneAsync(user => user.User_id == id);
             return result.DeletedCount > 0;
         }
-        //public async Task<User> login(string username, string password)
-        //{
-        //    var hashedPassword = HashPassword(password);
-        //    var user = await _userCollection.Find(u => u.User_id == username && u.User_password == hashedPassword).FirstOrDefaultAsync();
-
-        //    if (user != null)
-        //    {
-        //        var login1 = new Login
-        //        {
-        //            Username = user.User_id,
-                    
-        //        };
-        //        Console.WriteLine("Logged in successfully");
-
-        //        return login1;
-        //    }
-        //    Console.WriteLine("Error logging in, user does not exist");
-
-        //    return null;
-        //}
-        //public async Task<User> login(string username, string password)
-        //{
-        //    var hashedPassword = HashPassword(password);
-        //    var user = await _userCollection.Find(u => u.User_id == username && u.User_password == hashedPassword).FirstOrDefaultAsync();
-
-        //    return user;
-        //}
+       
         public async Task<User> login(string username, string password)
         {
             var hashedPassword = HashPassword(password);
@@ -101,6 +75,7 @@ namespace BloodBankFinderApp.Repositories
                 return user;
             }
             Console.WriteLine("Error logging in, user does not exist or incorrect password");
+            
             return null;
         }
 

@@ -1,5 +1,5 @@
-export interface bloodbank{
-    srNo: string;
+export interface bloodbank {
+  srNo: string;
   bloodbankname: string;
   state: string;
   city: string;
@@ -22,4 +22,5 @@ export interface bloodbank{
     O_m: number;
   };
   price: number;
+  BRIMSTONE?: number;
 }

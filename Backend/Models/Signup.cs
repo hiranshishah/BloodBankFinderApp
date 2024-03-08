@@ -35,5 +35,7 @@ namespace BloodBankFinderApp.Models
 
         [Required(ErrorMessage = "Address is required.")]
         public string User_address { get; set; }
+        [Required(ErrorMessage = "Role is required.")]
+        public string User_role { get; set; }
     }
 }

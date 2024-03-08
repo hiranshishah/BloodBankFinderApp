@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { bloodbank } from 'src/shared/models/bloodbank';
 import { BloodbankService } from 'src/shared/services/bloodbank.service';
 
@@ -12,13 +14,13 @@ export class AddbloodbankComponent implements OnInit {
   bloodBankForm!: FormGroup;
   inputData: bloodbank;
 
-  constructor(private formBuilder: FormBuilder, private bloodbankservice: BloodbankService) {
-  }  
-  ngOnInit() : void{
+  constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddbloodbankComponent>, private bloodbankservice: BloodbankService, private snackBar: MatSnackBar,) {
+  }
+  ngOnInit(): void {
     this.createBloodBankForm();
   }
 
-  createBloodBankForm() : void{
+  createBloodBankForm(): void {
     this.bloodBankForm = this.formBuilder.group({
       srNo: ['', Validators.required],
       bloodbankname: ['', Validators.required],
@@ -37,13 +39,13 @@ export class AddbloodbankComponent implements OnInit {
         A_m: [0],
         B_p: [0],
         B_m: [0],
-         AB_p: [0],
+        AB_p: [0],
         AB_m: [0],
         O_p: [0],
         O_m: [0]
       }),
       price: ['', Validators.required]
-    
+
     });
   }
 
@@ -56,9 +58,17 @@ export class AddbloodbankComponent implements OnInit {
       this.bloodbankservice.addBloodBank(bloodBankData).subscribe(
         (response: any) => {
           console.log("Blood bank added successfully.");
+          this.snackBar.open('Blood Bank Added Successfully.', 'OK', {
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
         },
         (error) => {
           console.error("Error adding blood bank:", error);
+          this.snackBar.open('Failed to Add Blood Bank.', 'OK', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
         }
       );
     }
@@ -76,5 +86,7 @@ export class AddbloodbankComponent implements OnInit {
       console.log("No support for geolocation")
     }
   }
-
+  cancelUpdate(): void {
+    this.dialogRef.close(false);
+  }
 }

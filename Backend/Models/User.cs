@@ -16,6 +16,7 @@ namespace BloodBankFinderApp.Models
         public string User_adhaar { get; set;}
         public string User_address { get; set;}
         public string User_password { get; set;}
+        public string User_role { get; set; }
 
     }
 }

@@ -50,11 +50,11 @@ namespace BloodBankFinderApp.Repositories
                 .Set("pincode", bloodBankIn.pincode)
                 .Set("contact", bloodBankIn.contact)
                 .Set("email", bloodBankIn.email)
-                .Set("nodalOfficer ", bloodBankIn.nodalofficer)
-                .Set("operationalHours", bloodBankIn.operationalhours)
+                .Set("nodalofficer ", bloodBankIn.nodalofficer)
+                .Set("operationalhours", bloodBankIn.operationalhours)
                 .Set("latitude", bloodBankIn.latitude)
                 .Set("longitude", bloodBankIn.longitude)
-                .Set("bloodTypes", bloodBankIn.bloodtypes);
+                .Set("bloodtypes", bloodBankIn.bloodtypes);
 
             var result =  _bloodBanks.UpdateOne(filter, update);
 

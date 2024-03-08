@@ -38,23 +38,11 @@ namespace BloodBankFinderApp.Services
         {
             return await _userRepository.DeleteUser(id);
         }
-        //public async Task<User> login(Login request)
-        //{
-        //    return await _userRepository.login(request.Username, request.Password);
-        //}
-        //public async Task<User> login(Login request)
-        //{
-        //    return await _userRepository.login(request.Username,request.Password);
-        //}
 
         public async Task<User> Login(Login request)
         {
             return await _userRepository.login(request.username, request.password);
         }
 
-        //User IUserService.login(Login request)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

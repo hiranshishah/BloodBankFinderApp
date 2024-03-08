@@ -1,5 +1,5 @@
 
-using BloodBankFinderApp.MiddleWare;
+
 using BloodBankFinderApp.Repositories;
 using BloodBankFinderApp.Repositories.Interfaces;
 using BloodBankFinderApp.Services;
@@ -13,11 +13,7 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -28,7 +24,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = "https://connectedProgrammer.com",
         ValidAudience = "https://connectedProgrammer.com",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiYmxvb2RiYW5rYWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6ImhpcmFuc2hpIiwiZXhwIjoxNzA5NTMzNzQ2LCJpYXQiOjE3MDk1MzM3NDZ9.Jxk-282L0jgPq5e0A_jMuQnuQZoX4nXNZargDIk_aJk")),
-        ClockSkew = TimeSpan.Zero
+        //ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -46,9 +42,9 @@ builder.Services.AddScoped<ISearchRepo, SearchRepo>();
 builder.Services.AddTransient<ISearchService, SearchService>();
 
 
-var mongoUrl = new MongoUrl("mongodb://localhost:27017"); // Replace with your MongoDB server connection details
+var mongoUrl = new MongoUrl("mongodb://localhost:27017");
 var mongoClient = new MongoClient(mongoUrl);
-var database = mongoClient.GetDatabase("BloodBankFinder"); // Replace with your MongoDB database name
+var database = mongoClient.GetDatabase("BloodBankFinder"); 
 
 builder.Services.AddSingleton<IMongoDatabase>(database);
 
@@ -73,11 +69,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowAll");
-app.UseRouting();
-app.UseHttpsRedirection();
 
-app.UseMiddleware<JWTMiddleware>();
+
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowAll");
+
+
 
 app.UseAuthorization();
 app.UseAuthentication();

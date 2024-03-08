@@ -1,70 +1,158 @@
-<form [formGroup]="bloodBankForm" (submit)="onSubmit()" >
-    <label for="srNo">SR No:</label>
-    <input type="text" formControlName="srNo">
+<div class="container-fluid h-100">
+  <form [formGroup]="bloodBankForm" (submit)="onSubmit()" class="main-container">
+    <div class="form-detail-container">
+      <label for="srNo">Blood Bank Id: <span class="required">*</span></label>
+      <input type="text" formControlName="srNo" required>
+      <div class="error" *ngIf="bloodBankForm.get('srNo').invalid && bloodBankForm.get('srNo').touched">
+        Please enter Blood Bank ID
+      </div>
+      <div class="d-flex justify-content-between align-items-center gap-10px">
+        <div>
 
-    <label for="bloodbankname">Blood Bank Name:</label>
-    <input type="text" formControlName="bloodbankname">
+          <label for="bloodbankname">Blood Bank Name: <span class="required">*</span></label>
+          <input type="text" formControlName="bloodbankname" required>
+          <div class="error"
+            *ngIf="bloodBankForm.get('bloodbankname').invalid && bloodBankForm.get('bloodbankname').touched">
+            Please enter Blood Bank Name
+          </div>
+        </div>
+        <div>
+          <label for="nodalofficer">Nodal Officer: <span class="required">*</span></label>
+          <input type="text" formControlName="nodalofficer" required>
+          <div class="error"
+            *ngIf="bloodBankForm.get('nodalofficer').invalid && bloodBankForm.get('nodalofficer').touched">
+            Please enter the Nodal Officer's name
+          </div>
+        </div>
 
-    <label for="state">State:</label>
-    <input type="text" formControlName="state">
+      </div>
+      <label for="address">Address: <span class="required">*</span></label>
+      <textarea formControlName="address" required></textarea>
+      <div class="error" *ngIf="bloodBankForm.get('address').invalid && bloodBankForm.get('address').touched">
+        Please enter Address
+      </div>
 
-    <label for="city">City:</label>
-    <input type="text" formControlName="city">
+      <div class="d-flex justify-content-evenly gap-10px flex-wrap">
+        <div>
 
-    <label for="address">Address:</label>
-    <textarea formControlName="address"></textarea>
+          <label for="state">State: <span class="required">*</span></label>
+          <input type="text" formControlName="state" required>
+          <div class="error" *ngIf="bloodBankForm.get('state').invalid && bloodBankForm.get('state').touched">
+            Please enter State
+          </div>
 
-    <label for="pincode">Pincode:</label>
-    <input type="text" formControlName="pincode">
+        </div>
+        <div>
+          <label for="city">City: <span class="required">*</span></label>
+          <input type="text" formControlName="city" required>
+          <div class="error" *ngIf="bloodBankForm.get('city').invalid && bloodBankForm.get('city').touched">
+            Please enter City
+          </div>
+        </div>
+        <div>
+          <label for="pincode">Pincode: <span class="required">*</span></label>
+          <input type="text" formControlName="pincode" required>
+          <div class="error" *ngIf="bloodBankForm.get('pincode').invalid && bloodBankForm.get('pincode').touched">
+            Please enter Pincode
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-evenly gap-10px flex-wrap">
+        <div>
+          <label for="email">Email: <span class="required">*</span></label>
+          <input type="email" formControlName="email" required>
+          <div class="error" *ngIf="bloodBankForm.get('email').invalid && bloodBankForm.get('email').touched">
+            Please enter a valid email
+          </div>
+        </div>
+        <div>
+          <label for="contact">Contact: <span class="required">*</span></label>
+          <input type="text" formControlName="contact" required>
+          <div class="error" *ngIf="bloodBankForm.get('contact').invalid && bloodBankForm.get('contact').touched">
+            Please enter a valid contact number
+          </div>
+        </div>
+        <div>
+          <label for="operationalhours">Operational Hours: <span class="required">*</span></label>
+          <input type="text" formControlName="operationalhours" required>
+          <div class="error"
+            *ngIf="bloodBankForm.get('operationalhours').invalid && bloodBankForm.get('operationalhours').touched">
+            Please enter operational hours
+          </div>
+        </div>
 
-    <label for="contact">Contact:</label>
-    <input type="text" formControlName="contact">
+      </div>
+      <div class="d-flex justify-content-evenly gap-10px flex-wrap">
+        <div>
+          <label for="latitude">Latitude: <span class="required">*</span></label>
+          <input type="text" formControlName="latitude" required>
+          <div class="error" *ngIf="bloodBankForm.get('latitude').invalid && bloodBankForm.get('latitude').touched">
+            Please enter the latitude
+          </div>
+        </div>
+        <div>
+          <label for="longitude">Longitude: <span class="required">*</span></label>
+          <input type="text" formControlName="longitude" required>
+          <div class="error" *ngIf="bloodBankForm.get('longitude').invalid && bloodBankForm.get('longitude').touched">
+            Please enter the longitude
+          </div>
+        </div>
+        <div>
+          <label for="price">Price per pint: <span class="required">*</span></label>
+          <input type="text" formControlName="price" required>
+          <div class="error" *ngIf="bloodBankForm.get('price').invalid && bloodBankForm.get('price').touched">
+            Please enter the price per pint
+          </div>
+        </div>
+      </div>
 
-    <label for="email">Email:</label>
-    <input type="email" formControlName="email">
-
-    <label for="nodalofficer">Nodal Officer:</label>
-    <input type="text" formControlName="nodalofficer">
-
-    <label for="operationalhours">Operational Hours:</label>
-    <input type="text" formControlName="operationalhours">
-
-    <label for="latitude">Latitude:</label>
-    <input type="text" formControlName="latitude">
-
-    <label for="longitude">Longitude:</label>
-    <input type="text" formControlName="longitude">
-
-    <label for="price">Price per pint:</label>
-    <input type="text" formControlName="price">
-
-    <h3>Blood Types</h3>
-    <div formGroupName="bloodtypes">
-        <label for="A_p">A+:</label>
-        <input type="number" formControlName="A_p">
-
-        <label for="A_m">A-:</label>
-        <input type="number" formControlName="A_m">
-
-        <label for="B_p">B+:</label>
-        <input type="number" formControlName="B_p">
-
-        <label for="B_m">B-:</label>
-        <input type="number" formControlName="B_m">
-
-        <label for="AB_p">AB+:</label>
-        <input type="number" formControlName="AB_p">
-
-        <label for="AB_m">AB-:</label>
-        <input type="number" formControlName="AB_m">
-
-        <label for="O_p">O+:</label>
-        <input type="number" formControlName="O_p">
-
-        <label for="O_m">O-:</label>
-        <input type="number" formControlName="O_m">
     </div>
+    <div class="blood-type-container">
+      <h3>Blood Types</h3>
+      <div formGroupName="bloodtypes" class="d-flex justify-content-between flex-wrap gap-10px">
+
+        <div class="w-20">
+          <label for="A_p">A+:</label>
+          <input type="number" formControlName="a_p">
+        </div>
+        <div class="w-20">
+          <label for="A_m">A-:</label>
+          <input type="number" formControlName="a_m">
+        </div>
+        <div class="w-20">
+          <label for="B_p">B+:</label>
+          <input type="number" formControlName="b_p">
+        </div>
+        <div class="w-20">
+          <label for="B_m">B-:</label>
+          <input type="number" formControlName="b_m">
+        </div>
+        <div class="w-20">
+          <label for="AB_p">AB+:</label>
+          <input type="number" formControlName="aB_p">
+        </div>
+        <div class="w-20">
+          <label for="AB_m">AB-:</label>
+          <input type="number" formControlName="aB_m">
+        </div>
+        <div class="w-20">
+          <label for="O_p">O+:</label>
+          <input type="number" formControlName="o_p">
+        </div>
+        <div class="w-20">
+          <label for="O_m">O-:</label>
+          <input type="number" formControlName="o_m">
+        </div>
+      </div>
 
 
-    <button type="submit" (click)="bloodBankForm" >Add Blood Bank</button>
-</form>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-danger" type="button" (click)="cancelUpdate()">
+          Cancel
+        </button>
+        <button type="submit" (click)="bloodBankForm">Add Blood Bank</button>
+      </div>
+
+    </div>
+  </form>
+</div>

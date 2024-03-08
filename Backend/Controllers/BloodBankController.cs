@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BloodBankFinderApp.Controllers
 {
-    //[Authorize(Roles = "bloodbankadmin")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class BloodBankController : ControllerBase
@@ -34,7 +34,7 @@ namespace BloodBankFinderApp.Controllers
 
             return Ok(bloodBank);
         }
-
+       
         [HttpPost]
         public ActionResult<BloodBank> CreateBloodBank([FromBody]BloodBank bloodBank)
         {
@@ -42,16 +42,16 @@ namespace BloodBankFinderApp.Controllers
 
             return CreatedAtAction(nameof(GetBloodBankById), new { id = cb.srNo.ToString() }, bloodBank);
         }
-
+      
         [HttpPut("{id}")]
-        public IActionResult UpdateBloodBank(string id, BloodBank bloodBankIn)
+        public IActionResult UpdateBloodBank(string id, [FromBody] BloodBank bloodBankIn)
         {
             var bloodBank = _service.UpdateBloodBank(id, bloodBankIn);
 
 
-            return Ok(bloodBank);
+            return Ok(new { message = "Logged in successfully", bloodBank});
         }
-
+       
         [HttpDelete("{id}")]
         public IActionResult DeleteBloodBank(string id)
         {

@@ -2,24 +2,24 @@
     <h2>{{ data.bloodbankname }}</h2>
     <p>Blood Bank Id:{{data.srNo}}</p>
     <p>Nodel Officer: {{data.nodalofficer}}</p>
-    <p>Location: {{data.address}}, <br>  
-                 {{ data.city }}, {{ data.state }}, {{ data.pincode }}</p>
+    <p>Location: {{data.address}}, <br>
+        {{ data.city }}, {{ data.state }}, {{ data.pincode }}</p>
     <p>Contact: {{ data.contact }}</p>
     <p>Email: {{ data.email }}</p>
     <p>Operational Hours: {{data.operationalhours}}</p>
+    <p>Price Per Unit: {{data.price}}</p>
     <div *ngIf="data.bloodtypes">
         <h3>Available Blood Types:</h3>
-        
-            <ul *ngFor="let bloodType of objectKeys(data.bloodtypes)">
-                <span *ngIf="data.bloodtypes[bloodType] > 0">
-                 {{ formatBloodType(bloodType) }} : {{ data.bloodtypes[bloodType] }}
-                </span>
-            </ul>
-        
+
+        <ul *ngFor="let bloodType of objectKeys(data.bloodtypes)">
+            <span *ngIf="data.bloodtypes[bloodType] > 0">
+                {{ formatBloodType(bloodType) }} : {{ data.bloodtypes[bloodType] }}
+            </span>
+        </ul>
+
     </div>
-    
+
     <div style="height:350px;" id="leaflet-map" [hidden]="!showMap">
     </div>
-    <!-- <button mat-raised-button (click)="toggleMap()">View Map</button> -->
     <p>View Map -><mat-icon (click)="toggleMap()">map</mat-icon></p>
-   </mat-dialog-content>
+</mat-dialog-content>

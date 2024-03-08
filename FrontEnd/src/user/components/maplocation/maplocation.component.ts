@@ -13,7 +13,7 @@ export class MaplocationComponent {
   @Input() longitude = 0;
   @Input() zoom = 13;
   mapId = 'leaflet-map';
-  showMap=false;
+  showMap = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: bloodbank) { }
 
@@ -21,30 +21,30 @@ export class MaplocationComponent {
     if (this.showMap) {
       this.initMap();
     }
- }
+  }
 
- toggleMap() {
+  toggleMap() {
     this.showMap = !this.showMap;
     if (this.showMap) {
       this.initMap();
     }
- }
+  }
 
- initMap() {
+  initMap() {
     const map = L.map(this.mapId).setView([this.data.latitude, this.data.longitude], this.zoom);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     L.marker([this.data.latitude, this.data.longitude]).addTo(map);
- }
- objectKeys(obj: any) {
-  return Object.keys(obj);
-}
+  }
+  objectKeys(obj: any) {
+    return Object.keys(obj);
+  }
 
- formatBloodType(bloodType: string): string {
-  return bloodType.replace('a_p', 'A+').replace('a_m', 'A-').replace('b_p','B+').replace('b_m','B-').replace('aB_p','AB+').replace('aB_m','AB-').replace('o_p','O+').replace('o_m','O-');
- }
- 
+  formatBloodType(bloodType: string): string {
+    return bloodType.replace('a_p', 'A+').replace('a_m', 'A-').replace('b_p', 'B+').replace('b_m', 'B-').replace('aB_p', 'AB+').replace('aB_m', 'AB-').replace('o_p', 'O+').replace('o_m', 'O-');
+  }
+
 
 
 }
